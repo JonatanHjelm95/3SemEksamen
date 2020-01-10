@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import utils.CettiaBootstrap;
 import utils.EMF_Creator;
 
 /**
@@ -43,8 +42,8 @@ import utils.EMF_Creator;
  *
  * @author Martin
  */
-@Path("Example")
-public class ExampleResource {
+@Path("Users")
+public class UsersResource {
 
     @Context
     private UriInfo context;
@@ -57,7 +56,7 @@ public class ExampleResource {
     /**
      * Creates a new instance of ExampleResource
      */
-    public ExampleResource() {
+    public UsersResource() {
 
     }
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -128,68 +127,5 @@ public class ExampleResource {
         return "{\"msg\": \"Hello, you just posted" + v1 + "and" + v2 + "\"}";
     }
 
-    @Path("/{id}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "A method that is a simple get example with a parameter.",
-            tags = {"GET"},
-            description = "Returns a message if logged in as user ",
-            responses = {
-                @ApiResponse(description = "Response",
-                        content = @Content(mediaType = "application/json",
-                                schema = @Schema(implementation = msg.class))),
-                @ApiResponse(responseCode = "404", description = "Not a integer parameter"),
-                @ApiResponse(responseCode = "200", description = "succes")
-            })
-    public String getById(@PathParam("id") long id) {
-        Server S = CettiaBootstrap.getServer();
-        Map<String, Object> output = new LinkedHashMap<>();
-        output.put("sender", "Example/{id}");
-        output.put("text", "Enpoint called, with input" + id);
-        S.find(tag("channel:log")).send("message", output);
-        return "{\"msg\": \"Hello, you just requested(GET)" + id + "\"}";
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoForAll() {
-        Server S = CettiaBootstrap.getServer();
-        Map<String, Object> output = new LinkedHashMap<>();
-        output.put("sender", "Example/");
-        output.put("text", "Enpoint called");
-        S.find(tag("channel:log")).send("message", output);
-        return "{\"msg\":\"Hello anonymous\"}";
-    }
-
-    //Just to verify if the database is setup
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("all")
-    public String allUsers() {
-        Server S = CettiaBootstrap.getServer();
-        Map<String, Object> output = new LinkedHashMap<>();
-        output.put("sender", "Example/all");
-        output.put("text", "Enpoint called");
-        S.find(tag("channel:log")).send("message", output);
-        EntityManager em = EMF.createEntityManager();
-        try {
-            List<User> users = em.createQuery("select user from User user").getResultList();
-            return "[" + users.size() + "]";
-        } finally {
-            em.close();
-        }
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("Stream")
-    public String tests() {
-        Server S = CettiaBootstrap.getServer();
-        Map<String, Object> output = new LinkedHashMap<>();
-        output.put("sender", "Example/Stream");
-        output.put("text", "Enpoint called");
-        S.find(tag("channel:log")).send("message", output);
-        return "{\"msg\":\"Hello anonymous\"}";
-    }
 
 }

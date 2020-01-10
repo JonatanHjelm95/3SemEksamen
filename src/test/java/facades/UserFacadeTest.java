@@ -1,8 +1,7 @@
 package facades;
 
-import entities.Products;
 import utils.EMF_Creator;
-import entities.RenameMe;
+import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -18,23 +17,23 @@ import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class ProductFacadeTest {
+public class UserFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static ProductFacade facade;
+    private static UserFacade facade;
 
-    public ProductFacadeTest() {
+    public UserFacadeTest() {
     }
 
     //@BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/GENBRUGSEN_test",
+                "jdbc:mysql://localhost:3307/EKSAMEN_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = ProductFacade.getFacade(emf);
+        facade = UserFacade.getUserFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -46,7 +45,7 @@ public class ProductFacadeTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = ProductFacade.getFacade(emf);
+       facade = UserFacade.getUserFacade(emf);
     }
 
     @AfterAll
@@ -61,9 +60,9 @@ public class ProductFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Products.deleteAllRows").executeUpdate();
-            em.persist(new Products());
-            em.persist(new Products());
+            em.createNamedQuery("User.deleteAllRows").executeUpdate();
+            em.persist(new User("user1", "pass1"));
+            em.persist(new User("user2", "pass2"));
 
             em.getTransaction().commit();
         } finally {
@@ -79,7 +78,7 @@ public class ProductFacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getProductCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getUserCount(), "Expects two rows in the database");
     }
 
 }

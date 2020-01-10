@@ -21,9 +21,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(errorhandling.GenericExceptionMapper.class);
-        resources.add(rest.ExampleResource.class);
-        resources.add(rest.GoogleResource.class);
-        resources.add(rest.ProductResource.class);
+        resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
+        resources.add(rest.UsersResource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.LoginEndpoint.class);
         resources.add(security.RolesAllowedFilter.class);

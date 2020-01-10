@@ -29,6 +29,16 @@ public class UserFacade {
         return instance;
     }
 
+    public long getUserCount() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            long userCount = (long) em.createQuery("SELECT COUNT(u) FROM User u").getSingleResult();
+            return userCount;
+        } finally {
+            em.close();
+        }
+    }
+
     public User getVeryfiedUser(String username, String password) throws AuthenticationException {
         EntityManager em = emf.createEntityManager();
         User user;
