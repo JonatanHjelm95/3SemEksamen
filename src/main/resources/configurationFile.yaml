@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  title: Genbrugsen
+  description: A site for accesing different API's to collect data from different pages that lets users sell items.
+  version: 2.0.0
+
+host: '--'
+schemes:
+  - https
+basePath: localhost:8080/Genbrugsen/api
+produces:
+  - application/json
+paths:
+  "/":
+    get:
+      description: description
+      parameters:
+      - name: cachebeater
+        in: query
+        description: Cachebeater string.
+        required: false
+        type: string
+      responses:
+        default:
+          description: Invalid request.
+          schema:
+            "$ref": "#/definitions/Error"
+definitions:
+  Error:
+    type: object
+    description: A representation of a error
+    properties:
+      type:
+        type: string
+        description: The error type
+      value:
+        type: string
+        description: Explanation of the error

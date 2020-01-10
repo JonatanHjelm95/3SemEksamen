@@ -1,0 +1,185 @@
+body {
+  background-color: #fafafa;
+}
+
+.ResultTableContainer {
+  padding: 20px;
+  margin: 50px 0;
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 10px;
+}
+
+.ResultList {
+  padding: 0 50px;
+}
+
+.ResultTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 20px;
+
+  tr:nth-child(even) {
+    background-color: #f9fbfc;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9fbfc;
+  }
+
+  th,
+  td {
+    border: 0;
+    padding: 20px 20px 20px 0;
+    font-family: 'TTNorms';
+    text-align: left;
+
+    &:first-child {
+      padding-left: 25px;
+    }
+
+    &:last-child {
+      padding-right: 25px;
+    }
+  }
+
+  thead {
+    border-radius: 10px;
+    tr {
+      th {
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        background-color: #fafafa;
+        color: #6c7682;
+        padding: 20px 0;
+
+        &:first-child {
+          border-top-left-radius: 10px;
+        }
+        &:last-child {
+          border-top-right-radius: 10px;
+        }
+      }
+    }
+  }
+
+  tbody {
+    background-color: white;
+  }
+}
+
+.ResultRow {
+  &__normalRow {
+    background-color: white;
+    border-top: 1px solid #e6e8ec;
+
+    td:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    td:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .count {
+      color: #0581fc;
+      font-weight: bold;
+    }
+
+    &:hover {
+      transition: 200ms;
+      border-radius: 10px !important;
+      background-color: #0581fc !important;
+      color: white;
+
+      & .count {
+        color: white !important;
+      }
+    }
+
+    .title {
+      font-weight: 500;
+    }
+  }
+
+  &__expandedRow {
+    height: 100%;
+    // display: block;
+    transition: 500ms 500ms ease-in-out;
+
+    &hide {
+      height: 0hgf jkuf dhyzfddsAa;
+      transition: 500ms 0ms linear;
+
+      display: none;
+    }
+  }
+}
+
+.DescriptionBox {
+  display: flex;
+
+  .container-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+
+    .image {
+      border-radius: 5px;
+    }
+
+    .link {
+      margin-top: 20px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0581fc;
+      transition: 200ms;
+
+      &:hover,
+      &:active {
+        color: #6bb5ff;
+        transition: 200ms;
+      }
+    }
+  }
+
+  .container-middle {
+    flex: 1;
+    padding: 20px 10px;
+
+    .title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .description {
+      color: #5b5b5b;
+      font-size: 16px;
+    }
+
+    .custom-hr {
+      height: 3px;
+      width: 100px;
+      background-color: #0581fc;
+      border-radius: 4px;
+      border: 0;
+      opacity: 0.05;
+    }
+  }
+
+  .container-right {
+    flex: 1;
+    padding: 20px 10px;
+  }
+}
