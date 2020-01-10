@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>dat.sem3.semproj</groupId>
-    <artifactId>semproject</artifactId>
+    <groupId>dat.sem3.eksamen</groupId>
+    <artifactId>eksamen</artifactId>
     <version>1</version>
     <packaging>war</packaging>
 
-    <name>Genbrugsen</name>
+    <name>Eksamen</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -15,7 +15,7 @@
         
         <!-- TODO: Change the URL to your own tomcat server. Used to deploy your WAR-file 
         -->
-        <remote.server>http://genbrugspris.dk/manager/text</remote.server>
+        <remote.server>https://www.jmhdat3.com/manager/text</remote.server>
         
     </properties>
     
