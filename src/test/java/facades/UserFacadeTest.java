@@ -44,8 +44,8 @@ public class UserFacadeTest {
      */
     @BeforeAll
     public static void setUpClassV2() {
-       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = UserFacade.getUserFacade(emf);
+        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.DROP_AND_CREATE);
+        facade = UserFacade.getUserFacade(emf);
     }
 
     @AfterAll
@@ -63,7 +63,6 @@ public class UserFacadeTest {
             em.createNamedQuery("User.deleteAllRows").executeUpdate();
             em.persist(new User("user1", "pass1"));
             em.persist(new User("user2", "pass2"));
-
             em.getTransaction().commit();
         } finally {
             em.close();
