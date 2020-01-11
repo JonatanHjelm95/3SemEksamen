@@ -27,23 +27,31 @@ class ApiFacade {
         return opts;
     }
 
-    login = async(user,pass) => {
-        return {username: user, role:"admin"}
-    }
-
-    realogin = async (user, pass) => {
-        const options = this.makeOptions("POST", true, { username: user, password: pass });
+    login = async (user, pass) => {
+        const options = this.makeOptions("POST", false, { username: user, password: pass });
        // return fetch(URL + "/api/login", options)
        //     .then(handleHttpErrors) 
        //     .then(res => this.setToken(res.token))
        //     .then(res => res)
-       const res = await fetch(URL + "/api/login", options)
+       const res = await fetch("api/login", options)
        const json = await res.json();
        if(!res.ok){
            throw {status: res.status, fullError: json}
        }
        this.setToken(res.token)
+       sessionStorage.setItem("user",JSON.stringify({Username:json.username,Role:json.role}));
        return json;
+    }
+    
+    register = async (user,pass,type) => {
+        const options = this.makeOptions("POST", false, { username: user, password: pass,userRole:type });
+        const res = await fetch("api/register", options)
+        const json = await res.json();
+        if(!res.ok){
+            throw {status: res.status, fullError: json}
+        }
+        this.setToken(res.token)
+        return json;
     }
     
     CheckIfUser(list){

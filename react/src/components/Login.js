@@ -135,7 +135,7 @@ const Login = props => {
     showRegisterForm(true)
   }
   const register = async (username, pass) => {
-    const { username: resUsername, role: resRole } = await facade.login(
+    const { username: resUsername, role: resRole } = await facade.register(
       username,
       pass
     );

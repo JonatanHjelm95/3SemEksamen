@@ -1,13 +1,13 @@
 swagger: '2.0'
 info:
-  title: Genbrugsen
+  title: Eksamen
   description: A site for accesing different API's to collect data from different pages that lets users sell items.
   version: 2.0.0
 
 host: '--'
 schemes:
   - https
-basePath: localhost:8080/Genbrugsen/api
+basePath: localhost:8080/Eksamen/api
 produces:
   - application/json
 paths:
