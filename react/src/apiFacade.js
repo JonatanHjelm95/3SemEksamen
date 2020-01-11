@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-const URL = "http://localhost:8080/semproject";
+const URL = "http://localhost:8084/eksamen";
 //const URL = "http://localhost:8080/ca3";
 function handleHttpErrors(res) {
     if (!res.ok) {

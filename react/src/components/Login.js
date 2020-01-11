@@ -4,6 +4,7 @@ import './styles.scss';
 import facade from '../apiFacade';
 import Modal from 'react-bootstrap/Modal';
 
+
 const LoginForm = ({ login }) => {
   const [user, setUser] = useState({
     username: '',
@@ -12,7 +13,7 @@ const LoginForm = ({ login }) => {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    login(user.username, user.password);
+    facade.realogin(user.username, user.password);
   };
 
   const onChange = evt => {
@@ -30,6 +31,9 @@ const LoginForm = ({ login }) => {
         <input placeholder="Password" id="password" />
         <button type="submit" className="login">
           Login
+        </button>
+        <button type="submit" className="register">
+          Register
         </button>
       </form>
     </div>
