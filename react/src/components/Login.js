@@ -7,10 +7,10 @@ import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 
 
 
-const LoginForm = ({ login, registerNewUser, Register }) => {
+const LoginForm = ({ login, registerNewUser }) => {
   const [user, setUser] = useState({
     username: '',
-    password: '',
+    password: ''
   });
 
   const onSubmit = evt => {
@@ -56,11 +56,16 @@ const RegisterForm = ({ register }) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
+    passwordCheck: ''
   });
 
   const onSubmit = evt => {
     evt.preventDefault();
-    register(user.username, user.password);
+    if (user.password === user.passwordCheck) {
+      register(user.username, user.password);
+    } else {
+      alert("Passwords didn't match.");
+    }
   };
 
   const onChange = evt => {
@@ -116,17 +121,16 @@ const Login = props => {
   };
 
   const login = async (username, pass) => {
-    const { username: resUsername, role: resRole } = await facade.login(
-      username,
-      pass
-    );
-    setLoggedIn(true);
-    setRole(resRole);
-    setUsername(resUsername);
-    showLoginForm(false);
-    showRegisterForm(false);
-    setRegisterClicked(false);
-
+    try {
+      let user = await facade.login(username, pass)
+      setLoggedIn(true);
+      setRole(user.role);
+      setUsername(user.username);
+      showLoginForm(false);
+    }
+    catch (error) {
+      alert("username eller password forkert");
+    }
   };
 
   const registerNewUser = () => {
@@ -134,17 +138,18 @@ const Login = props => {
     setRegisterClicked(true);
     showRegisterForm(true)
   }
+
   const register = async (username, pass) => {
-    const { username: resUsername, role: resRole } = await facade.register(
-      username,
-      pass
-    );
-    setLoggedIn(true);
-    setRole(resRole);
-    setUsername(resUsername);
-    showLoginForm(false);
-    showRegisterForm(false);
-    setRegisterClicked(false);
+    try {
+      let user = await facade.register(username, pass)
+      setLoggedIn(true);
+      setRole(user.role);
+      setUsername(user.username);
+      showLoginForm(false);
+    }
+    catch (error) {
+      alert("username allerede i brug.");
+    }
   };
 
   return (
@@ -169,10 +174,11 @@ const Login = props => {
           size="md"
           centered
           onHide={() => {
-            showLoginForm(false);
+            showRegisterForm(false);
+            
           }}
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton onClick={() => showLoginForm(false)}>
             <Modal.Title id="contained-modal-title-vcenter">
               <FiUser className="modal-icon" />
               Login
@@ -189,9 +195,10 @@ const Login = props => {
             centered
             onHide={() => {
               showRegisterForm(false);
+              setRegisterClicked(false);
             }}
           >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton onClick={() => showRegisterForm(false)}>
               <Modal.Title id="contained-modal-title-vcenter">
                 <FiUser className="modal-icon" />
                 Register
@@ -202,6 +209,7 @@ const Login = props => {
             </Modal.Body>
           </Modal>)}
     </div>
+    
   );
 };
 

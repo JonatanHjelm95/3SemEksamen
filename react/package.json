@@ -2,8 +2,8 @@
   "name": "eksamen",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
   "proxy": "http://localhost:8084/eksamen/",
+  "homepage": "./",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "cettia-client": "^1.1.0",

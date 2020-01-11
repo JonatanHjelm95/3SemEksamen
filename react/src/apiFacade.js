@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-const URL = "http://localhost:8084/eksamen";
+const URL = "https://jmhdat3.com/eksamen";
 //const URL = "http://localhost:8080/ca3";
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -43,8 +43,8 @@ class ApiFacade {
        return json;
     }
     
-    register = async (user,pass,type) => {
-        const options = this.makeOptions("POST", false, { username: user, password: pass,userRole:type });
+    register = async (user,pass) => {
+        const options = this.makeOptions("POST", false, { username: user, password: pass});
         const res = await fetch("api/register", options)
         const json = await res.json();
         if(!res.ok){
