@@ -121,7 +121,6 @@ class Navigation extends React.Component {
           </Switch> */}
         </Router>
 
-        <ResultList />
       </div>
     );
   }
