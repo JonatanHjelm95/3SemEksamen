@@ -31,8 +31,8 @@ import utils.EMF_Creator;
 public class LoginEndpoint {
 
   public static final int TOKEN_EXPIRE_TIME = 1000 * 60 * 30; //30 min
-  //private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
-  private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory("pu", null, null, null, EMF_Creator.Strategy.CREATE);
+  private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
+  //private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory("pu", null, null, null, EMF_Creator.Strategy.CREATE);
   public static final UserFacade USER_FACADE = UserFacade.getUserFacade(EMF);
   
   @POST
