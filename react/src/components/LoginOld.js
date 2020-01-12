@@ -33,7 +33,7 @@ const LoginForm = ({ login }) => {
 
     <div className="LoginForm">
       <form onSubmit={onSubmit} onChange={onChange}>
-        <input placeholder="Brugernavn" id="username" />
+        <input placeholder="username" id="username" />
         <input placeholder="password" type="password" id="password" />
         <button type="submit" className="login">
           Login
@@ -47,14 +47,13 @@ const RegisterForm = ({ register }) => {
   const [user, setUser] = useState({
     username: '',
     password: '',
-    repeatPwd: '',
-    type: 'User'
+    passwordConfirm: ''
   });
 
   const onSubmit = evt => {
     evt.preventDefault();
     if (user.password == user.passwordConfirm) {
-      register(user.username, user.password, user.type);
+      register(user.username, user.password);
     } else {
       alert("Passwords didn't match");
     }
@@ -71,25 +70,21 @@ const RegisterForm = ({ register }) => {
   return (
     <div className="LoginForm">
       <form onSubmit={onSubmit} onChange={onChange}>
-        <input placeholder="Brugernavn" id="username" />
-        <input placeholder="Kodeord" type="password" id="password" />
-        <input placeholder="Gentag kodeord" type="password" id="passwordConfirm" />
-        <select id="type">
-          <option value="User">User</option>
-          <option value="Admin">Admin</option>
-        </select>
+        <input placeholder="username" id="username" />
+        <input placeholder="password" type="password" id="password" />
+        <input placeholder="confirm password" type="password" id="passwordConfirm" />
         <button type="submit" className="login">
-          Register
+          Create User
         </button>
       </form>
     </div>
   );
 };
 
-const UserInfo = ({ username, role, logout }) => {
+const UserInfo = ({ username, role, Flogout }) => {
   const onLogout = evt => {
     evt.preventDefault();
-    logout();
+    Flogout();
   };
 
   return (
@@ -102,7 +97,7 @@ const UserInfo = ({ username, role, logout }) => {
         </li>
         <li>
           <button onClick={onLogout} className="login">
-            <span>Logud</span>
+            <span>Logout</span>
           </button>
         </li>
       </ul>
@@ -110,23 +105,31 @@ const UserInfo = ({ username, role, logout }) => {
   );
 };
 
-const Login = props => {
+const LoginOld = props => {
   const [username, setUsername] = useState(false);
   const [role, setRole] = useState('');
-  const [loggedIn, setLoggedIn] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
   const [loginFormShown, showLoginForm] = useState(false);
-  const [formtype, formtypechange] = useState('Login')
-  const [loading, setLoading] = useState(false)
-  const Flogout = async () => {
+  const [formtype, formtypechange] = useState('Login');
+  const [loading, setLoading] = useState(false);
+
+  const Flogout = () => {
     setLoggedIn(false);
+    console.log(loggedIn);
     facade.logout();
   };
+
+  const logout = async () => {
+    await facade.logout();
+    setLoggedIn(false)
+    console.log(loggedIn)
+  }
 
   const login = async (username, pass) => {
     try {
       setLoading(true);
       let user = await facade.login(username, pass)
-      setLoading(false);
+      //setRole(user.role);
       setLoggedIn(true);
       setRole(user.role);
       setUsername(user.username);
@@ -136,12 +139,15 @@ const Login = props => {
       alert("username or password wrong");
       setLoading(false);
     }
+    
   };
 
-  const register = async (username, pass, type) => {
+
+
+  const register = async (username, pass) => {
     try {
       setLoading(true);
-      let user = await facade.register(username, pass, type)
+      let user = await facade.register(username, pass)
       setLoading(false);
       setLoggedIn(true);
       setRole(user.role);
@@ -149,19 +155,23 @@ const Login = props => {
       showLoginForm(false);
     }
     catch (error) {
-      alert("username is already in use");
+      alert("username already exists in database");
       setLoading(false);
     }
   }
+
+
   return (
     <div className="loginform">
       {loggedIn ? (
-        <UserInfo username={username} role={role} logout={Flogout} />
+        <UserInfo username={username} role={role} Flogout={Flogout} />
       ) : (
           <button
             className="login"
             onClick={() => {
               showLoginForm(true);
+              setLoggedIn(false)
+              console.log(loggedIn)
               formtypechange('Login')
             }}
           >
@@ -186,12 +196,12 @@ const Login = props => {
         </Modal.Header>
         <Modal.Body>
           {loading ? (<div className="LoginForm"><Loader /></div>) : (formtype == 'Login') ?
-            (<div className="loginform"><LoginForm login={login} />
+            (<div><LoginForm login={login} />
               <button
+                className="register"
                 onClick={() => formtypechange('Opret Ny Bruger')}
-                className="registerBtn"
               >
-                <span>Not a user?</span>
+                <span>Ny Bruger</span>
               </button>
             </div>
             ) : (
@@ -199,8 +209,9 @@ const Login = props => {
             )}
         </Modal.Body>
       </Modal>
+
     </div>
   );
 };
 
-export default Login;
+export default LoginOld;

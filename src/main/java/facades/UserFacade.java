@@ -58,16 +58,16 @@ public class UserFacade {
         return user;
     }
 
-    public User registerUser(String username, String password) throws AuthenticationException {
+    public User registerUser(String username, String password, String role) {
         EntityManager em = emf.createEntityManager();
         User user = new User(username, password);
-        Role userRole = new Role("user");
+        Role userRole = new Role(role);
         user.addRole(userRole);
         try {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
-
+        
         } finally {
             em.close();
         }
@@ -75,7 +75,6 @@ public class UserFacade {
     }
     public static void main(String[] args) throws AuthenticationException {
         UserFacade uf = UserFacade.getUserFacade(EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE));
-        uf.registerUser("lars", "anderson");
     }
 
 }

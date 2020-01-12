@@ -2,8 +2,10 @@
   padding: 20px 50px;
   display: flex;
   flex-direction: row;
-  background-color: #0581fc;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+/*   background-color: #34344A;
+ */  
+ background-image: linear-gradient(to right, #DA2C38, #F87930);
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   .container-buttons {
@@ -132,7 +134,7 @@
 
     &:hover {
       transition: 200ms;
-      color: #0581fc;
+      color: #DA2C38;
       background-color: white;
     }
     .icon {
@@ -165,7 +167,7 @@
 
     &:hover {
       transition: 200ms;
-      color: #0581fc;
+      color: #DA2C38;
       background-color: white;
     }
     .icon {
@@ -185,6 +187,14 @@
 .modal-icon {
   margin-right: 10px;
   margin-top: -4px;
+}
+.modal-icon-white {
+  margin-right: 10px;
+  margin-top: -4px;
+  color: white;
+}
+.profileLabel {
+  color: white;
 }
 
 .LoginForm {
@@ -206,14 +216,49 @@
     padding: 8px 40px;
     font-size: 18px;
     border-radius: 10px;
-    border: 2px solid #0581fc;
-    color: #0581fc;
+    border: 2px solid #DA2C38;
+    color: #DA2C38;
     transition: 200ms;
 
     &:hover {
       color: white;
-      background-color: #0581fc;
+      background-color: #DA2C38;
       transition: 200ms;
     }
   }
+  .registerBtn {
+    display: inline-block;
+    padding: 8px 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #DA2C38;
+    color: #DA2C38;
+    transition: 200ms;
+
+    &:hover {
+      color: white;
+      background-color: #DA2C38;
+      transition: 200ms;
+    }
+  }
+}
+
+.UserInfoList {
+  list-style-type: none;
+}
+
+.loader {
+  position: inherit;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #F87930; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  left: 50%;
+  top: 50%;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
