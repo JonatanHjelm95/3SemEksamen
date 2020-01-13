@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
-//@Disabled
+@Disabled
 public class LoginEndpointTest {
 
     private static final int SERVER_PORT = 7777;
@@ -41,8 +41,13 @@ public class LoginEndpointTest {
     public static void setUpClass() {
         //This method must be called before you request the EntityManagerFactory
         EMF_Creator.startREST_TestWithDB();
-        emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.CREATE);
-
+        //emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.CREATE);
+        emf = EMF_Creator.createEntityManagerFactory(
+                "pu",
+                "jdbc:mysql://localhost:3307/EKSAMEN_test",
+                "dev",
+                "ax2",
+                EMF_Creator.Strategy.CREATE);
         httpServer = startServer();
         //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;

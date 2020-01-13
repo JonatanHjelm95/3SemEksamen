@@ -29,7 +29,7 @@ public class UserFacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3306/EKSAMEN_test",
+                "jdbc:mysql://localhost:3307/EKSAMEN_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
